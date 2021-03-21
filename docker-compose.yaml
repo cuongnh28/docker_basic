@@ -1,0 +1,35 @@
+version: "3"
+services:
+  kmysql:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: ltw
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+  kmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - kmysql:db
+    ports:
+      - 83:80
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+  kapp:
+    build: .
+    image: hongcuongnguyen/backend
+    ports:
+      - 8080:8080
+    environment:
+      DB_HOST: kmysql:3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: ltw
+volumes:
+  db_data: {}
