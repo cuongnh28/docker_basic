@@ -1,9 +1,10 @@
 Start Application
-Create artifact
+
+1. Create artifact
 mvn -DskipTests package
 
-Build docker compose file
+2. Build docker compose file
 docker-compose build
 
-Run docker compose to make app and db live
+3. Run docker compose to make app and db live
 docker-compose up
